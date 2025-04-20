@@ -42,7 +42,7 @@ TESTS = {
     "branch_selection": {
         "name": "Branch Selection",
         "description": "Tests branch selection functionality",
-        "script": "login_test.py",
+        "script": "Branch_Selection.py",
         "last_run": None,
         "status": None,
         "output": []
@@ -50,7 +50,7 @@ TESTS = {
     "route_test": {
         "name": "Route Test",
         "description": "Tests route management functionality",
-        "script": "route_automation.py",
+        "script": "login_automation.py",
         "last_run": None,
         "status": None,
         "output": []
@@ -58,7 +58,7 @@ TESTS = {
     "full_workflow": {
         "name": "Full Workflow",
         "description": "Tests the entire workflow from login to route management",
-        "script": "full_workflow.py",
+        "script": "login_automation.py",
         "last_run": None,
         "status": None,
         "output": []

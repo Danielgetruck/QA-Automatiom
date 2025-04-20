@@ -50,7 +50,7 @@ TESTS = {
     "route_test": {
         "name": "Route Test",
         "description": "Tests route management functionality",
-        "script": "login_automation.py",
+        "script": "Route_Test.py",
         "last_run": None,
         "status": None,
         "output": []

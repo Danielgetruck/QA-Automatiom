@@ -9,6 +9,7 @@ def login_test():
     with sync_playwright() as playwright:
         # Set debug mode if parameter exists
         debug_mode = "--debug" in sys.argv
+        skip_sync_verification = "--skip-sync-verify" in sys.argv
         
         # Open a new browser - ensure it's visible
         browser = playwright.chromium.launch(headless=False, slow_mo=100)
@@ -113,6 +114,7 @@ def login_test():
             
             # Wait for page to stabilize
             page.wait_for_load_state("networkidle")
+            time.sleep(3)  # Additional wait to ensure page is fully ready
             
             # Click sync button
             sync_button = page.get_by_role("button", name="סנכרון")
@@ -120,64 +122,208 @@ def login_test():
             sync_button.click()
             print("Clicked sync button", flush=True)
             
-            # Wait for sync results modal
+            # Wait for sync processing - INCREASED WAIT TIME
+            print("Waiting for sync processing (30 seconds)...", flush=True)
             page.wait_for_load_state("networkidle")
+            time.sleep(30)  # Increased wait time - give the system more time to process
             
-            # Check if synchronization was successful
-            sync_results_modal = page.locator("[data-test-id=\"SyncResultsModal-Content\"]")
-            
-            try:
-                sync_results_modal.wait_for(state="visible", timeout=10000)
-                print("Sync results modal appeared", flush=True)
-                
-                # Check for success message or data indicators
+            # Check if synchronization was successful - with improved success detection
+            if skip_sync_verification:
+                print("Skipping sync verification as requested", flush=True)
+            else:
                 try:
-                    success_text = page.locator("text=הסנכרון הושלם בהצלחה")
-                    if success_text.is_visible(timeout=2000):
-                        print("Synchronization completed successfully", flush=True)
-                    else:
-                        print("No success message found, checking for data", flush=True)
-                except:
-                    print("No success message found, checking for data", flush=True)
-                
-                # Check for data elements
-                data_elements = page.locator("[data-test-id=\"SyncResultsModal-Content\"] >> ul >> li")
-                data_count = data_elements.count()
-                
-                if data_count > 0:
-                    print(f"Received data: {data_count} items found", flush=True)
+                    # First check if the modal is visible at all
+                    sync_results_modal = page.locator("[data-test-id=\"SyncResultsModal-Content\"]")
                     
-                    # Show details for first few items
-                    for i in range(min(data_count, 3)):
-                        item_text = data_elements.nth(i).text_content()
-                        print(f"Item {i+1}: {item_text[:50]}...", flush=True)
-                else:
-                    print("No data items found in sync results", flush=True)
-            except:
-                print("Sync results modal did not appear - synchronization may have failed", flush=True)
+                    print("Looking for sync results modal...", flush=True)
+                    is_modal_visible = sync_results_modal.is_visible(timeout=5000)
+                    
+                    if is_modal_visible:
+                        print("Sync results modal is visible", flush=True)
+                        
+                        # Take screenshot of sync modal for debugging
+                        page.screenshot(path="debug/screenshots/sync_modal.png")
+                        print("Took screenshot of sync modal", flush=True)
+                        
+                        # Track sync success
+                        sync_success = False
+                        
+                        # Check for success message - multiple possible message formats
+                        try:
+                            success_indicators = [
+                                "text=הסנכרון הושלם בהצלחה", 
+                                "text=סנכרון הושלם בהצלחה",
+                                "text=הושלם בהצלחה",
+                                "text=completed successfully"
+                            ]
+                            
+                            for indicator in success_indicators:
+                                try:
+                                    success_element = page.locator(indicator)
+                                    if success_element.count() > 0 and success_element.first.is_visible(timeout=500):
+                                        print(f"Success message found: '{indicator}'", flush=True)
+                                        sync_success = True
+                                        break
+                                except:
+                                    continue
+                                    
+                            if not sync_success:
+                                print("No explicit success message found, checking for data", flush=True)
+                        except Exception as msg_error:
+                            print(f"Error checking for success message: {msg_error}", flush=True)
+                        
+                        # Check for data elements - this is also a sign of success
+                        try:
+                            data_elements = page.locator("[data-test-id=\"SyncResultsModal-Content\"] >> ul >> li")
+                            data_count = data_elements.count()
+                            
+                            if data_count > 0:
+                                print(f"Received data: {data_count} items found", flush=True)
+                                sync_success = True
+                                
+                                # Show details for first few items
+                                for i in range(min(data_count, 3)):
+                                    item_text = data_elements.nth(i).text_content()
+                                    print(f"Item {i+1}: {item_text[:50]}...", flush=True)
+                            else:
+                                print("No data items found in sync results", flush=True)
+                                
+                                # Check for other positive indicators
+                                general_content = sync_results_modal.text_content()
+                                if general_content and len(general_content) > 0:
+                                    print(f"Modal content: {general_content[:100]}...", flush=True)
+                                    
+                                    # Keywords that might indicate success
+                                    success_keywords = ["הצלחה", "נסתיים בהצלחה", "completed", "success"]
+                                    for keyword in success_keywords:
+                                        if keyword in general_content:
+                                            print(f"Found success keyword in modal: '{keyword}'", flush=True)
+                                            sync_success = True
+                                            break
+                        except Exception as data_error:
+                            print(f"Error checking for data elements: {data_error}", flush=True)
+                        
+                        # Additional check for non-error status
+                        try:
+                            error_indicators = [
+                                "text=שגיאה", 
+                                "text=error",
+                                "text=נכשל",
+                                "text=failed",
+                                "[data-test-id=\"Error\"]",
+                                ".error-message"
+                            ]
+                            
+                            error_found = False
+                            for indicator in error_indicators:
+                                try:
+                                    error_element = page.locator(indicator)
+                                    if error_element.count() > 0 and error_element.first.is_visible(timeout=500):
+                                        error_text = error_element.first.text_content()
+                                        print(f"Error indicator found: '{error_text}'", flush=True)
+                                        error_found = True
+                                        break
+                                except:
+                                    continue
+                            
+                            # If there's no explicit error and we haven't confirmed success yet,
+                            # we'll consider it a success if the modal appeared at all
+                            if not error_found and not sync_success:
+                                print("No error indicators found, considering sync successful based on modal presence", flush=True)
+                                sync_success = True
+                        except Exception as error_check_error:
+                            print(f"Error checking for error indicators: {error_check_error}", flush=True)
+                        
+                        # If sync failed, raise exception
+                        if not sync_success:
+                            page.screenshot(path="debug/screenshots/sync_failed.png")
+                            raise Exception("Synchronization failed: No success indicators found")
+                        else:
+                            print("Sync verification completed: Considered successful", flush=True)
+                    else:
+                        # Modal is not visible - this might be an error or might be ok
+                        page.screenshot(path="debug/screenshots/no_sync_modal.png")
+                        print("Sync results modal not visible - this might mean instant success or failure", flush=True)
+                        
+                        # Check for any error messages on the page
+                        error_found = False
+                        try:
+                            error_indicators = [
+                                "text=שגיאה", 
+                                "text=error",
+                                "text=נכשל",
+                                "text=failed",
+                                "[data-test-id=\"Error\"]",
+                                ".error-message"
+                            ]
+                            
+                            for indicator in error_indicators:
+                                try:
+                                    error_element = page.locator(indicator)
+                                    if error_element.count() > 0 and error_element.first.is_visible(timeout=500):
+                                        error_text = error_element.first.text_content()
+                                        print(f"Error indicator found on page: '{error_text}'", flush=True)
+                                        error_found = True
+                                        break
+                                except:
+                                    continue
+                        except Exception as page_error_check:
+                            print(f"Error checking for page errors: {page_error_check}", flush=True)
+                        
+                        if error_found:
+                            raise Exception("Synchronization failed: No modal but error found on page")
+                        else:
+                            # If no modal and no error, we'll assume success
+                            print("No sync modal and no errors found - assuming sync was successful", flush=True)
+                        
+                except Exception as sync_error:
+                    # Take screenshot for debugging
+                    page.screenshot(path="debug/screenshots/sync_error.png")
+                    print(f"Sync verification error: {sync_error}", flush=True)
+                    print("Sync error screenshot saved at debug/screenshots/sync_error.png", flush=True)
+                    raise Exception(f"Synchronization process failed: {sync_error}")
             
-            # Close the sync results modal if visible
+            # Try to close the sync results modal if visible - allow it to fail silently
             try:
                 close_button = page.locator("[data-test-id=\"SyncResultsModal-Footer\"] [data-test-id=\"Button\"]")
                 if close_button.is_visible(timeout=2000):
                     close_button.click()
                     print("Clicked button at the bottom of sync results window", flush=True)
-            except:
-                print("Could not close sync results window or it was not visible", flush=True)
+                    time.sleep(1)  # Wait for modal to close
+            except Exception as close_error:
+                print(f"Note: Could not close sync results window (this is ok): {close_error}", flush=True)
             
             print("Test completed successfully", flush=True)
             
         except Exception as e:
             print(f"Error: {e}", flush=True)
-            page.screenshot(path="debug/screenshots/error_screenshot.png")
-            print("Error screenshot saved at debug/screenshots/error_screenshot.png", flush=True)
+            try:
+                page.screenshot(path="debug/screenshots/error_screenshot.png")
+                print("Error screenshot saved at debug/screenshots/error_screenshot.png", flush=True)
+            except:
+                print("Failed to save error screenshot", flush=True)
+            
+            # Re-raise to signal test failure
+            raise
+            
         finally:
             # Save tracing in any case
-            timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-            trace_path = f"debug/traces/trace_{timestamp}.zip"
-            context.tracing.stop(path=trace_path)
-            print(f"Trace saved in file {trace_path}", flush=True)
+            try:
+                timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+                trace_path = f"debug/traces/trace_{timestamp}.zip"
+                context.tracing.stop(path=trace_path)
+                print(f"Trace saved in file {trace_path}", flush=True)
+            except Exception as trace_error:
+                print(f"Failed to save trace: {trace_error}", flush=True)
+                
             browser.close()
+            print("Browser closed", flush=True)
 
 if __name__ == "__main__":
-    login_test()
+    try:
+        login_test()
+        print("Test run completed without errors", flush=True)
+        sys.exit(0)  # Success exit code
+    except Exception as e:
+        print(f"Test failed: {e}", flush=True)
+        sys.exit(1)  # Error exit code

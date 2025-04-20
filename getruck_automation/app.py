@@ -26,7 +26,7 @@ TESTS = {
     "login_test": {
         "name": "Login Test",
         "description": "Tests login functionality",
-        "script": "login_automation.py",
+        "script": "login_test.py",
         "last_run": None,
         "status": None,
         "output": []
@@ -34,7 +34,7 @@ TESTS = {
     "sync_test": {
         "name": "Sync Test",
         "description": "Tests synchronization functionality",
-        "script": "sync_automation.py",
+        "script": "sync_Test.py",
         "last_run": None,
         "status": None,
         "output": []
@@ -42,7 +42,7 @@ TESTS = {
     "branch_selection": {
         "name": "Branch Selection",
         "description": "Tests branch selection functionality",
-        "script": "branch_automation.py",
+        "script": "login_test.py",
         "last_run": None,
         "status": None,
         "output": []

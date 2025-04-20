@@ -62,6 +62,14 @@ TESTS = {
         "last_run": None,
         "status": None,
         "output": []
+     },
+    "full_workflow": {
+        "name": "Delete last plan",
+        "description": "Delete last plan",
+        "script": "Delete_last_plan.py",
+        "last_run": None,
+        "status": None,
+        "output": []
     }
 }
 

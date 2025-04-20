@@ -6,32 +6,70 @@
     <title>Getruck Automation Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #3a7ca5;
-            --secondary-color: #2f6690;
-            --success-color: #65b891;
-            --light-bg: #f7f9fb;
-            --border-radius: 8px;
-            --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --success-color: #06d6a0;
+            --warning-color: #ffd166;
+            --danger-color: #ef476f;
+            --info-color: #118ab2;
+            --dark-color: #073b4c;
+            --light-color: #f8f9fa;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
         }
         
         body {
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--light-bg);
-            color: #2c3e50;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+            min-height: 100vh;
             padding: 20px;
-            line-height: 1.6;
+            color: var(--dark-color);
+        }
+        
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
         }
         
         .dashboard-header {
             margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
         }
         
         .dashboard-title {
-            font-weight: 600;
-            color: var(--primary-color);
-            font-size: 1.8rem;
+            font-weight: 700;
+            font-size: 2.2rem;
+            background: linear-gradient(90deg, var(--primary-color), var(--info-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dashboard-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--info-color));
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .dashboard-subtitle {
+            color: #6c757d;
+            font-weight: 300;
+            font-size: 1.1rem;
         }
         
         .card {
@@ -40,22 +78,41 @@
             box-shadow: var(--box-shadow);
             overflow: hidden;
             height: 100%;
+            transition: var(--transition);
+            background: #fff;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
         }
         
         .card-header {
-            background-color: white;
+            background: #fff;
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            padding: 1rem 1.25rem;
+            padding: 1.25rem;
             font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-header .icon {
+            margin-right: 10px;
+            font-size: 1.2rem;
             color: var(--primary-color);
         }
         
         .list-group-item {
             border-left: none;
             border-right: none;
-            padding: 0.8rem 1.25rem;
-            transition: all 0.2s ease;
+            padding: 1rem 1.25rem;
+            transition: var(--transition);
             border-color: rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
         
         .list-group-item:first-child {
@@ -63,50 +120,85 @@
         }
         
         .list-group-item:hover {
-            background-color: #f8f9fa;
+            background-color: rgba(67, 97, 238, 0.05);
+            cursor: pointer;
         }
         
         .list-group-item.active {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-color: transparent;
+            color: white;
+            position: relative;
+        }
+        
+        .list-group-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background-color: var(--info-color);
+        }
+        
+        .test-icon {
+            margin-right: 10px;
+            font-size: 1rem;
         }
         
         .badge {
-            padding: 0.4rem 0.6rem;
-            border-radius: 6px;
+            padding: 0.5rem 0.8rem;
+            border-radius: 30px;
             font-weight: 500;
             font-size: 0.75rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         
         .badge-running {
-            background-color: #f0ad4e;
-            color: white;
+            background-color: var(--warning-color);
+            color: #000;
         }
         
         .badge-success {
             background-color: var(--success-color);
-            color: white;
+            color: #fff;
         }
         
         .badge-failed, .badge-error {
-            background-color: #d9534f;
-            color: white;
+            background-color: var(--danger-color);
+            color: #fff;
         }
         
         .badge-notrun {
             background-color: #6c757d;
-            color: white;
+            color: #fff;
         }
         
         .test-info {
-            background-color: rgba(58, 124, 165, 0.05);
+            background-color: rgba(67, 97, 238, 0.05);
             border-radius: var(--border-radius);
-            padding: 1rem;
+            padding: 1.25rem;
             margin-bottom: 1.5rem;
+            border-left: 4px solid var(--primary-color);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(67, 97, 238, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(67, 97, 238, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(67, 97, 238, 0); }
         }
         
         .test-description {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
         }
         
         .test-last-run {
@@ -117,88 +209,192 @@
         }
         
         .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-            border-radius: 6px;
-            padding: 0.5rem 1.25rem;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 30px;
+            padding: 0.6rem 1.5rem;
             font-weight: 500;
-            transition: all 0.2s;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+            transition: var(--transition);
+            opacity: 0;
+            z-index: -1;
+        }
+        
+        .btn-primary:hover:not(:disabled)::before {
+            opacity: 1;
         }
         
         .btn-primary:hover:not(:disabled) {
-            background-color: var(--secondary-color);
-            border-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(67, 97, 238, 0.4);
+        }
+        
+        .btn-primary:active:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(67, 97, 238, 0.4);
         }
         
         .btn-primary:disabled {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-            opacity: 0.65;
+            background: linear-gradient(90deg, #a3a3a3, #c2c2c2);
+            opacity: 0.7;
+        }
+        
+        .btn-play-icon {
+            margin-right: 8px;
         }
         
         .output-container {
-            background-color: #f7f9fb;
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            background-color: #1e1e2e;
             border-radius: var(--border-radius);
-            padding: 1rem;
-            font-family: 'Consolas', 'Courier New', monospace;
+            padding: 1.25rem;
+            font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
             font-size: 0.9rem;
-            min-height: 300px;
+            color: #e4e4e7;
+            min-height: 350px;
             max-height: 500px;
             overflow-y: auto;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            border: 1px solid #2d2d3f;
+        }
+        
+        .output-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            border-bottom: 1px solid rgba(67, 97, 238, 0.2);
+            padding-bottom: 0.75rem;
         }
         
         .output-title {
             font-weight: 600;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0;
             color: var(--primary-color);
-            font-size: 1rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .output-title .icon {
+            margin-right: 8px;
+            color: var(--primary-color);
         }
         
         .output-line {
             margin: 0;
-            padding: 0.15rem 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+            padding: 0.25rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            line-height: 1.5;
         }
         
-        .empty-output {
+        .output-line:hover {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+        
+        .output-empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            min-height: 200px;
             color: #6c757d;
             text-align: center;
-            padding: 1.5rem;
+            flex-direction: column;
         }
         
-        .icon-small {
-            margin-right: 0.5rem;
-            font-size: 0.9rem;
+        .output-empty .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.2;
         }
         
         .content-height {
-            min-height: 600px;
+            min-height: 650px;
         }
+        
+        /* Animation for running state */
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .test-running {
+            animation: blink 1.5s infinite;
+        }
+        
+        .running-animation {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .btn-primary.running {
+            position: relative;
+            pointer-events: none;
+            padding-left: 2.5rem;
+        }
+        
+        .btn-primary.running .running-animation {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .success-color { color: var(--success-color); }
+        .warning-color { color: var(--warning-color); }
+        .danger-color { color: var(--danger-color); }
+        .info-color { color: var(--info-color); }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="dashboard-container">
         <div class="dashboard-header">
-            <h1 class="dashboard-title">
-                <i class="fas fa-tachometer-alt icon-small"></i>
-                Getruck Automation Dashboard
-            </h1>
+            <h1 class="dashboard-title">Getruck Automation Dashboard</h1>
         </div>
         
         <div class="row g-4 content-height">
             <div class="col-md-4">
                 <div class="card h-100">
                     <div class="card-header">
-                        <i class="fas fa-vials icon-small"></i>
-                        Test Catalog
+                        <i class="fas fa-rocket icon"></i>
+                        Available Tests
                     </div>
                     <div class="list-group list-group-flush" id="test-list">
                         {% for test_id, test in tests.items() %}
                         <button class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" 
                                 id="test-{{ test_id }}" 
                                 onclick="selectTest('{{ test_id }}')">
-                            <span>{{ test.name }}</span>
+                            <span>
+                                <i class="fas fa-vial test-icon"></i>
+                                {{ test.name }}
+                            </span>
                             <span class="badge badge-notrun" id="status-{{ test_id }}">
                                 {% if test.status %}{{ test.status }}{% else %}not run{% endif %}
                             </span>
@@ -211,6 +407,7 @@
             <div class="col-md-8">
                 <div class="card h-100">
                     <div class="card-header">
+                        <i class="fas fa-tachometer-alt icon"></i>
                         <span id="selected-test-name">Select a test</span>
                     </div>
                     <div class="card-body">
@@ -220,16 +417,21 @@
                         </div>
                         
                         <button class="btn btn-primary mb-4" id="run-button" onclick="runTest()" disabled>
-                            <i class="fas fa-play icon-small"></i>
+                            <i class="fas fa-play btn-play-icon"></i>
                             Run Test
                         </button>
                         
-                        <h6 class="output-title">
-                            <i class="fas fa-terminal icon-small"></i>
-                            Test Output
-                        </h6>
+                        <div class="output-header">
+                            <h6 class="output-title">
+                                <i class="fas fa-terminal icon"></i>
+                                Test Output
+                            </h6>
+                        </div>
                         <div class="output-container" id="output">
-                            <p class="empty-output">Select and run a test to see output results</p>
+                            <div class="output-empty">
+                                <i class="fas fa-code icon"></i>
+                                <p>Select and run a test to see output results</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -263,12 +465,25 @@
                 // Update output if this is the selected test
                 if (testId === selectedTestId) {
                     const outputDiv = document.getElementById('output');
-                    if (outputDiv.querySelector('.empty-output')) {
+                    if (outputDiv.querySelector('.output-empty')) {
                         outputDiv.innerHTML = '';
                     }
                     
                     const p = document.createElement('p');
                     p.className = 'output-line';
+                    
+                    // Colorize certain keywords
+                    let lineText = line;
+                    if (lineText.includes('success') || lineText.includes('completed successfully')) {
+                        p.classList.add('success-color');
+                    } else if (lineText.includes('error') || lineText.includes('failed')) {
+                        p.classList.add('danger-color');
+                    } else if (lineText.includes('warning') || lineText.includes('caution')) {
+                        p.classList.add('warning-color');
+                    } else if (lineText.includes('info') || lineText.includes('note')) {
+                        p.classList.add('info-color');
+                    }
+                    
                     p.textContent = line;
                     outputDiv.appendChild(p);
                     outputDiv.scrollTop = outputDiv.scrollHeight;
@@ -299,8 +514,9 @@
             });
             document.getElementById('test-' + testId).classList.add('active');
             
-            // Show test info container
-            document.getElementById('test-info-container').style.display = 'block';
+            // Show test info container with animation
+            const infoContainer = document.getElementById('test-info-container');
+            infoContainer.style.display = 'block';
             
             // Enable run button
             document.getElementById('run-button').disabled = false;
@@ -327,13 +543,30 @@
                         data.output.forEach(line => {
                             const p = document.createElement('p');
                             p.className = 'output-line';
+                            
+                            // Colorize certain keywords
+                            if (line.includes('success') || line.includes('completed successfully')) {
+                                p.classList.add('success-color');
+                            } else if (line.includes('error') || line.includes('failed')) {
+                                p.classList.add('danger-color');
+                            } else if (line.includes('warning') || line.includes('caution')) {
+                                p.classList.add('warning-color');
+                            } else if (line.includes('info') || line.includes('note')) {
+                                p.classList.add('info-color');
+                            }
+                            
                             p.textContent = line;
                             outputDiv.appendChild(p);
                         });
                         // Make sure we scroll to the bottom
                         outputDiv.scrollTop = outputDiv.scrollHeight;
                     } else {
-                        outputDiv.innerHTML = '<p class="empty-output">No output yet. Run a test to see results.</p>';
+                        outputDiv.innerHTML = `
+                            <div class="output-empty">
+                                <i class="fas fa-code icon"></i>
+                                <p>No output yet. Run a test to see results.</p>
+                            </div>
+                        `;
                     }
                     
                     // Update status badge
@@ -352,12 +585,17 @@
             // Add appropriate class
             if (status === 'running') {
                 statusBadge.classList.add('badge-running');
+                statusBadge.classList.add('test-running');
+                statusBadge.innerHTML = `<span class="running-animation"></span>running`;
             } else if (status === 'success') {
                 statusBadge.classList.add('badge-success');
+                statusBadge.innerHTML = `<i class="fas fa-check-circle"></i> success`;
             } else if (status === 'failed' || status === 'error') {
                 statusBadge.classList.add('badge-failed');
+                statusBadge.innerHTML = `<i class="fas fa-times-circle"></i> ${status}`;
             } else {
                 statusBadge.classList.add('badge-notrun');
+                statusBadge.innerHTML = `<i class="fas fa-circle"></i> not run`;
             }
         }
         
@@ -365,12 +603,18 @@
         function runTest() {
             if (!selectedTestId) return;
             
-            // Disable the run button
-            document.getElementById('run-button').disabled = true;
+            // Update button to show running state
+            const runButton = document.getElementById('run-button');
+            runButton.disabled = true;
+            runButton.classList.add('running');
+            runButton.innerHTML = `
+                <span class="running-animation"></span>
+                Running Test...
+            `;
             
             // Clear output
             const outputDiv = document.getElementById('output');
-            outputDiv.innerHTML = '<p class="output-line">Starting test...</p>';
+            outputDiv.innerHTML = '<p class="output-line info-color">Starting test...</p>';
             
             // Send request to run the test
             fetch('/run_test', {
@@ -384,8 +628,10 @@
             .then(data => {
                 if (data.status === 'error') {
                     alert(data.message);
-                    document.getElementById('run-button').disabled = false;
-                    outputDiv.innerHTML = '<p class="output-line error">Error: ' + data.message + '</p>';
+                    runButton.disabled = false;
+                    runButton.classList.remove('running');
+                    runButton.innerHTML = `<i class="fas fa-play btn-play-icon"></i> Run Test`;
+                    outputDiv.innerHTML = '<p class="output-line danger-color">Error: ' + data.message + '</p>';
                 }
             });
         }
@@ -399,8 +645,12 @@
                     
                     // Only enable button if test is not running
                     if (testId === selectedTestId) {
+                        const runButton = document.getElementById('run-button');
+                        
                         if (data.status !== 'running') {
-                            document.getElementById('run-button').disabled = false;
+                            runButton.disabled = false;
+                            runButton.classList.remove('running');
+                            runButton.innerHTML = `<i class="fas fa-play btn-play-icon"></i> Run Test`;
                         }
                         
                         if (data.last_run) {

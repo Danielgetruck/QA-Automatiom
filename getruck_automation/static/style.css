@@ -1,0 +1,409 @@
+/* Main styles for Getruck Automation Dashboard */
+
+:root {
+    --primary-color: #4361ee;
+    --secondary-color: #3f37c9;
+    --success-color: #06d6a0;
+    --warning-color: #ffd166;
+    --danger-color: #ef476f;
+    --info-color: #118ab2;
+    --dark-color: #073b4c;
+    --light-color: #f8f9fa;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f7fa;
+    padding: 20px;
+    color: #2d3748;
+}
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dashboard-header {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.dashboard-title {
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    background: linear-gradient(90deg, var(--primary-color), var(--info-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    display: inline-block;
+}
+
+.dashboard-title::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 0px;
+    background: linear-gradient(90deg, var(--primary-color), var(--info-color));
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+/* Company tabs styling */
+.companies-tabs {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    position: relative;
+}
+
+.nav-tabs {
+    background-color: #f0f4f8;
+    border-bottom: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 0.5rem 0.5rem 0;
+}
+
+.nav-tabs::-webkit-scrollbar {
+    height: 5px;
+}
+
+.nav-tabs::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 10px;
+}
+
+.nav-tabs::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.nav-tabs .nav-item {
+    margin-right: 0.25rem;
+    flex: 0 0 auto;
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    color: #495057;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    transition: var(--transition);
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.5);
+    min-width: 120px;
+    text-align: center;
+}
+
+.nav-tabs .nav-link.active {
+    color: var(--primary-color);
+    background-color: #fff;
+    font-weight: 600;
+    box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.nav-tabs .nav-link.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--info-color));
+}
+
+.nav-tabs .nav-link:hover:not(.active) {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: var(--secondary-color);
+}
+
+.company-info {
+    display: none;
+    padding: 1rem;
+    background-color: #fff;
+    animation: fadeIn 0.3s ease;
+}
+
+.company-info.active {
+    display: block;
+}
+
+.company-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: rgba(67, 97, 238, 0.05);
+    border-radius: var(--border-radius);
+    border-left: 3px solid var(--primary-color);
+}
+
+.company-details .detail-item {
+    flex: 1 0 200px;
+}
+
+.company-details .detail-label {
+    color: #6c757d;
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+}
+
+.company-details .detail-value {
+    font-weight: 500;
+}
+
+/* Custom company color indicators */
+.company-indicator {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.company-1 { background-color: #4361ee; }
+.company-2 { background-color: #06d6a0; }
+.company-3 { background-color: #ef476f; }
+.company-4 { background-color: #ffd166; }
+.company-5 { background-color: #118ab2; }
+.company-6 { background-color: #073b4c; }
+.company-7 { background-color: #ad41e1; }
+
+/* Cards styling */
+.card {
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 20px;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    transition: var(--transition);
+}
+
+.card-header {
+    background-color: #fff;
+    padding: 15px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.card-header .icon {
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+
+/* Test list styling */
+.list-group-item {
+    border-left: none;
+    border-right: none;
+    padding: 12px 15px;
+    transition: background-color 0.2s;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
+.list-group-item.active {
+    background-color: #e6effd;
+    color: var(--primary-color);
+    border-color: rgba(0,0,0,0.05);
+    font-weight: 500;
+}
+
+.test-icon {
+    margin-right: 10px;
+}
+
+/* Badge styling */
+.badge {
+    padding: 6px 10px;
+    border-radius: 30px;
+    font-weight: 500;
+    font-size: 0.75rem;
+}
+
+.badge-notrun {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.badge-running {
+    background-color: var(--warning-color);
+    color: #000;
+}
+
+.badge-success {
+    background-color: var(--success-color);
+    color: #fff;
+}
+
+.badge-failed, .badge-error {
+    background-color: var(--danger-color);
+    color: #fff;
+}
+
+/* Test info section */
+.test-info {
+    background-color: #f8f9fa;
+    border-radius: var(--border-radius);
+    padding: 15px;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.test-description {
+    margin-bottom: 10px;
+}
+
+.test-last-run {
+    color: #6c757d;
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    border-radius: 30px;
+    padding: 8px 20px;
+    font-weight: 500;
+    box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
+    transition: var(--transition);
+}
+
+.btn-play-icon {
+    margin-right: 8px;
+}
+
+/* Output container */
+.output-container {
+    background-color: #1e1e2e;
+    border-radius: var(--border-radius);
+    padding: 15px;
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: #e4e4e7;
+    min-height: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.output-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding-bottom: 10px;
+}
+
+.output-title {
+    font-weight: 600;
+    margin-bottom: 0;
+    color: var(--primary-color);
+    font-size: 1rem;
+}
+
+.output-title .icon {
+    margin-right: 8px;
+}
+
+.output-line {
+    margin: 0;
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.output-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 200px;
+    color: #6c757d;
+    text-align: center;
+}
+
+.output-empty .icon {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    opacity: 0.2;
+}
+
+/* Colors for test output */
+.success-color { color: var(--success-color); }
+.warning-color { color: var(--warning-color); }
+.danger-color { color: var(--danger-color); }
+.info-color { color: var(--info-color); }
+
+/* Animation for running state */
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.test-running {
+    animation: blink 1.5s infinite;
+}
+
+.running-animation {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s linear infinite;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.btn-primary.running {
+    position: relative;
+    pointer-events: none;
+    padding-left: 35px;
+}
+
+.btn-primary.running .running-animation {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

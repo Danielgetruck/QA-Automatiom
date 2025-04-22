@@ -295,8 +295,36 @@
                     // Get the company tests
                     const companyTests = data.tests;
                     
-                    // Add each test to the list
-                    Object.keys(companyTests).forEach(testId => {
+                    // Define the order as it appears in your code
+                    const testOrder = [
+                        "login_test",
+                        "sync_test", 
+                        "branch_selection",
+                        "route_test",
+                        "full_workflow",
+                        "delete_last_plan"
+                    ];
+                    
+                    // Sort the test IDs based on the defined order
+                    const sortedTestIds = Object.keys(companyTests).sort((a, b) => {
+                        const indexA = testOrder.indexOf(a);
+                        const indexB = testOrder.indexOf(b);
+                        
+                        // If both are in the order array, sort by that order
+                        if (indexA !== -1 && indexB !== -1) {
+                            return indexA - indexB;
+                        }
+                        
+                        // If only one is in the order array, prioritize it
+                        if (indexA !== -1) return -1;
+                        if (indexB !== -1) return 1;
+                        
+                        // Otherwise, keep original order
+                        return 0;
+                    });
+                    
+                    // Add each test to the list in the sorted order
+                    sortedTestIds.forEach(testId => {
                         const test = companyTests[testId];
                         
                         const button = document.createElement('button');

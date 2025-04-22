@@ -31,7 +31,7 @@ COMPANIES = {
             "login_test": {
                 "name": "Login Test",
                 "description": "Tests login functionality for Jafora",
-                "script": "login_test.py",
+                "script": "Jafora/login_test.py",
                 "script_args": "--company jafora --custom-login true",
                 "last_run": None,
                 "status": None,
@@ -40,7 +40,7 @@ COMPANIES = {
             "sync_test": {
                 "name": "Sync Test",
                 "description": "Tests synchronization functionality for Jafora's products",
-                "script": "sync_Test.py",
+                "script": "Jafora/sync_Test.py",
                 "script_args": "--company jafora --products all",
                 "last_run": None,
                 "status": None,
@@ -49,7 +49,7 @@ COMPANIES = {
             "branch_selection": {
                 "name": "Branch Selection",
                 "description": "Tests Jafora's branch selection workflow",
-                "script": "Branch_Selection.py",
+                "script": "Jafora/Branch_Selection.py",
                 "script_args": "--company jafora --branch 70",
                 "last_run": None,
                 "status": None,
@@ -58,7 +58,7 @@ COMPANIES = {
             "route_test": {
                 "name": "Route Test",
                 "description": "Tests route management for Jafora's distribution network",
-                "script": "Route_Test.py",
+                "script": "Jafora/Route_Test.py",
                 "script_args": "--company jafora --routes central",
                 "last_run": None,
                 "status": None,
@@ -67,7 +67,7 @@ COMPANIES = {
             "full_workflow": {
                 "name": "Full Workflow",
                 "description": "Tests the entire Jafora workflow from login to route management",
-                "script": "login_automation.py",
+                "script": "Jafora/login_automation.py",
                 "script_args": "--company jafora --full-test true",
                 "last_run": None,
                 "status": None,
@@ -76,7 +76,7 @@ COMPANIES = {
             "delete_last_plan": {
                 "name": "Delete Last Plan",
                 "description": "Deletes the last plan for Jafora",
-                "script": "Delete_last_plan.py",
+                "script": "Jafora/Delete_last_plan.py",
                 "script_args": "--company jafora",
                 "last_run": None,
                 "status": None,

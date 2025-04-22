@@ -26,6 +26,7 @@ COMPANIES = {
         "name": "Jafora",
         "email": "jafora@getruck.co",
         "password": "Jafor2024",
+        "environment": "RC",
         "branch": "Branch 70",
         "tests": {
             "login_test": {
@@ -88,7 +89,8 @@ COMPANIES = {
         "name": "Hollandia",
         "email": "hollandia@getruck.co",
         "password": "Hollandia2024",
-        "branch": "Branch 50",
+        "password1": "Hollandia2024",
+        "branch": "",
         "tests": {
             "login_test": {
                 "name": "Login Test",
@@ -123,7 +125,7 @@ COMPANIES = {
         "name": "Plassim",
         "email": "plassim@getruck.co",
         "password": "Plassim2024",
-        "branch": "Branch 30",
+        "branch": "",
         "tests": {
             "login_test": {
                 "name": "Login Test",
@@ -167,7 +169,7 @@ COMPANIES = {
         "name": "Asofta",
         "email": "asofta@getruck.co",
         "password": "Asofta2024",
-        "branch": "Branch 25",
+        "branch": "",
         "tests": {
             "login_test": {
                 "name": "Login Test",
@@ -202,7 +204,7 @@ COMPANIES = {
         "name": "Infiniya",
         "email": "infiniya@getruck.co",
         "password": "Infiniya2024",
-        "branch": "Branch 40",
+        "branch": "",
         "tests": {
             "login_test": {
                 "name": "Login Test",
@@ -228,7 +230,7 @@ COMPANIES = {
         "name": "Vetmarket",
         "email": "vetmarket@getruck.co",
         "password": "Vetmarket2024",
-        "branch": "Branch 60",
+        "branch": "",
         "tests": {
             "login_test": {
                 "name": "Login Test",
@@ -263,7 +265,7 @@ COMPANIES = {
         "name": "Tempo",
         "email": "tempo@getruck.co",
         "password": "Tempo2024",
-        "branch": "Branch 45",
+        "branch": "Branch 1",
         "tests": {
             "login_test": {
                 "name": "Login Test",

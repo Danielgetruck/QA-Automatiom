@@ -179,6 +179,7 @@
                         name: data.company,
                         email: '',
                         password: '',
+                        environment: 'Production',
                         branch: ''
                     };
                     
@@ -198,25 +199,32 @@
                         // Manually set the password and branch based on the company
                         if (companyId === "company1") {
                             company.password = "Jafor2024";
+                            company.environment = "RC";
                             company.branch = "Branch 70";
                         } else if (companyId === "company2") {
                             company.password = "Hollandia2024";
-                            company.branch = "Branch 50";
+                            company.environment = "";
+                            company.branch = "";
                         } else if (companyId === "company3") {
                             company.password = "Plassim2024";
-                            company.branch = "Branch 30";
+                            company.environment = "";
+                            company.branch = "";
                         } else if (companyId === "company4") {
                             company.password = "Asofta2024";
-                            company.branch = "Branch 25";
+                            company.environment = "";
+                            company.branch = "";
                         } else if (companyId === "company5") {
                             company.password = "Infiniya2024";
-                            company.branch = "Branch 40";
+                            company.environment = "";
+                            company.branch = "";
                         } else if (companyId === "company6") {
                             company.password = "Vetmarket2024";
-                            company.branch = "Branch 60";
+                            company.environment = "";
+                            company.branch = "";
                         } else if (companyId === "company7") {
                             company.password = "Tempo2024";
-                            company.branch = "Branch 45";
+                            company.environment = "";
+                            company.branch = "1";
                         }
                     }
                     
@@ -237,6 +245,10 @@
                             <div class="detail-item">
                                 <div class="detail-label">Password</div>
                                 <div class="detail-value">${company.password}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Environment</div>
+                                <div class="detail-value">${company.environment}</div>
                             </div>
                             <div class="detail-item">
                                 <div class="detail-label">Default Branch</div>

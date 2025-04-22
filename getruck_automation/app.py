@@ -25,7 +25,7 @@ COMPANIES = {
     "company1": {
         "name": "Jafora",
         "email": "jafora@getruck.co",
-        "password": "Jafor2024",
+        "password": "******",
         "Test_environment": "v51",
         "Real_environment": "RC",
         "branch": "Branch 70",
@@ -89,14 +89,13 @@ COMPANIES = {
     "company2": {
         "name": "Hollandia",
         "email": "hollandia@getruck.co",
-        "password": "Hollandia2024",
-        "password1": "Hollandia2024",
+        "password": "******",
         "branch": "",
         "tests": {
             "login_test": {
                 "name": "Login Test",
                 "description": "Tests login functionality for Hollandia",
-                "script": "login_test.py",
+                "script": "Hollandia/login_test.py",
                 "script_args": "--company hollandia --custom-login true",
                 "last_run": None,
                 "status": None,
@@ -105,7 +104,7 @@ COMPANIES = {
             "sync_test": {
                 "name": "Sync Test",
                 "description": "Tests synchronization functionality for Hollandia's dairy products",
-                "script": "sync_Test.py",
+                "script": "Hollandia/sync_Test.py",
                 "script_args": "--company hollandia --products dairy",
                 "last_run": None,
                 "status": None,
@@ -114,7 +113,7 @@ COMPANIES = {
             "branch_selection": {
                 "name": "Branch Selection",
                 "description": "Tests Hollandia's special branch selection process",
-                "script": "Branch_Selection.py",
+                "script": "Hollandia/Branch_Selection.py",
                 "script_args": "--company hollandia --branch 50",
                 "last_run": None,
                 "status": None,
@@ -124,14 +123,14 @@ COMPANIES = {
     },
     "company3": {
         "name": "Plassim",
-        "email": "plassim@getruck.co",
-        "password": "Plassim2024",
+        "email": "plassim@getruck.co.il",
+        "password": "******",
         "branch": "",
         "tests": {
             "login_test": {
                 "name": "Login Test",
                 "description": "Tests login functionality for Plassim",
-                "script": "login_test.py",
+                "script": "Plassim/login_test.py",
                 "script_args": "--company plassim --custom-login true",
                 "last_run": None,
                 "status": None,
@@ -140,7 +139,7 @@ COMPANIES = {
             "sync_test": {
                 "name": "Sync Test",
                 "description": "Tests synchronization for Plassim plastic products",
-                "script": "sync_Test.py",
+                "script": "Plassim/sync_Test.py",
                 "script_args": "--company plassim --products plastics",
                 "last_run": None,
                 "status": None,
@@ -149,7 +148,7 @@ COMPANIES = {
             "branch_selection": {
                 "name": "Branch Selection",
                 "description": "Tests Plassim branch selection with regional filters",
-                "script": "Branch_Selection.py",
+                "script": "Plassim/Branch_Selection.py",
                 "script_args": "--company plassim --branch 30 --region north",
                 "last_run": None,
                 "status": None,
@@ -158,7 +157,7 @@ COMPANIES = {
             "route_test": {
                 "name": "Route Test",
                 "description": "Tests Plassim route management with plastic products",
-                "script": "Route_Test.py",
+                "script": "Plassim/Route_Test.py",
                 "script_args": "--company plassim --routes north --product-type plastics",
                 "last_run": None,
                 "status": None,
@@ -169,13 +168,13 @@ COMPANIES = {
     "company4": {
         "name": "Asofta",
         "email": "asofta@getruck.co",
-        "password": "Asofta2024",
+        "password": "******",
         "branch": "",
         "tests": {
             "login_test": {
                 "name": "Login Test",
                 "description": "Tests login functionality for Asofta",
-                "script": "login_test.py", 
+                "script": "Asofta/login_test.py", 
                 "script_args": "--company asofta --custom-login true",
                 "last_run": None,
                 "status": None,
@@ -184,7 +183,7 @@ COMPANIES = {
             "route_test": {
                 "name": "Route Test",
                 "description": "Tests Asofta's specialized route management system",
-                "script": "Route_Test.py",
+                "script": "Asofta/Route_Test.py",
                 "script_args": "--company asofta --routes national --priority-delivery true",
                 "last_run": None,
                 "status": None,
@@ -193,7 +192,7 @@ COMPANIES = {
             "full_workflow": {
                 "name": "Full Workflow",
                 "description": "Tests the complete Asofta distribution workflow",
-                "script": "login_automation.py",
+                "script": "Asofta/login_automation.py",
                 "script_args": "--company asofta --full-test true --priority-accounts true",
                 "last_run": None,
                 "status": None,
@@ -204,13 +203,13 @@ COMPANIES = {
     "company5": {
         "name": "Infiniya",
         "email": "infiniya@getruck.co",
-        "password": "Infiniya2024",
+        "password": "******",
         "branch": "",
         "tests": {
             "login_test": {
                 "name": "Login Test",
                 "description": "Tests login functionality for Infiniya",
-                "script": "login_test.py",
+                "script": "Infiniya/login_test.py",
                 "script_args": "--company infiniya --custom-login true",
                 "last_run": None,
                 "status": None,
@@ -219,7 +218,7 @@ COMPANIES = {
             "sync_test": {
                 "name": "Sync Test",
                 "description": "Tests Infiniya's specialized product synchronization",
-                "script": "sync_Test.py",
+                "script": "Infiniya/sync_Test.py",
                 "script_args": "--company infiniya --products tech",
                 "last_run": None,
                 "status": None,
@@ -230,13 +229,13 @@ COMPANIES = {
     "company6": {
         "name": "Vetmarket",
         "email": "vetmarket@getruck.co",
-        "password": "Vetmarket2024",
+        "password": "******",
         "branch": "",
         "tests": {
             "login_test": {
                 "name": "Login Test",
                 "description": "Tests login functionality for Vetmarket",
-                "script": "login_test.py",
+                "script": "Vetmarket/login_test.py",
                 "script_args": "--company vetmarket --custom-login true",
                 "last_run": None,
                 "status": None,
@@ -245,7 +244,7 @@ COMPANIES = {
             "branch_selection": {
                 "name": "Branch Selection",
                 "description": "Tests Vetmarket's specialized branch selection for medical supplies",
-                "script": "Branch_Selection.py",
+                "script": "Vetmarket/Branch_Selection.py",
                 "script_args": "--company vetmarket --branch 60 --medical-supplies true",
                 "last_run": None,
                 "status": None,
@@ -254,7 +253,7 @@ COMPANIES = {
             "route_test": {
                 "name": "Route Test",
                 "description": "Tests Vetmarket's temperature-controlled route management",
-                "script": "Route_Test.py",
+                "script": "Vetmarket/Route_Test.py",
                 "script_args": "--company vetmarket --routes central --temperature-control true",
                 "last_run": None,
                 "status": None,
@@ -265,13 +264,13 @@ COMPANIES = {
     "company7": {
         "name": "Tempo",
         "email": "tempo@getruck.co",
-        "password": "Tempo2024",
+        "password": "******",
         "branch": "Branch 1",
         "tests": {
             "login_test": {
                 "name": "Login Test",
                 "description": "Tests login functionality for Tempo",
-                "script": "login_test.py",
+                "script": "Tempo/login_test.py",
                 "script_args": "--company tempo --custom-login true",
                 "last_run": None,
                 "status": None,
@@ -280,7 +279,7 @@ COMPANIES = {
             "sync_test": {
                 "name": "Sync Test",
                 "description": "Tests synchronization functionality for Tempo's beverage inventory",
-                "script": "sync_Test.py",
+                "script": "Tempo/sync_Test.py",
                 "script_args": "--company tempo --products beverages",
                 "last_run": None,
                 "status": None,
@@ -289,7 +288,7 @@ COMPANIES = {
             "branch_selection": {
                 "name": "Branch Selection",
                 "description": "Tests Tempo's branch selection with beverage specialization",
-                "script": "Branch_Selection.py",
+                "script": "Tempo/Branch_Selection.py",
                 "script_args": "--company tempo --branch 45 --beverage-type all",
                 "last_run": None,
                 "status": None,
@@ -298,7 +297,7 @@ COMPANIES = {
             "route_test": {
                 "name": "Route Test",
                 "description": "Tests Tempo's route management for beverage distribution",
-                "script": "Route_Test.py",
+                "script": "Tempo/Route_Test.py",
                 "script_args": "--company tempo --routes national --beverage-delivery true",
                 "last_run": None,
                 "status": None,

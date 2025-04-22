@@ -86,10 +86,10 @@ def login_test():
             date_picker.wait_for(state="visible")
             date_picker.click()
             
-            date_cell = page.get_by_role("cell", name="21").first
+            date_cell = page.get_by_role("cell", name="23").first
             date_cell.wait_for(state="visible")
             date_cell.dblclick()
-            print("Selected date 21", flush=True)
+            print("Selected date 23", flush=True)
             
             # Select branch
             branch_dropdown = page.locator("#modal [data-test-id=\"Drop-Down\"]").get_by_role("list").get_by_text("סניף")

@@ -179,7 +179,8 @@
                         name: data.company,
                         email: '',
                         password: '',
-                        environment: 'Production',
+                        Test_environment: 'Production',
+                        Real_environment :'check',
                         branch: ''
                     };
                     
@@ -199,31 +200,38 @@
                         // Manually set the password and branch based on the company
                         if (companyId === "company1") {
                             company.password = "Jafor2024";
-                            company.environment = "RC";
+                            company.Test_environment = "V51";
+                            company.Real_environment = "RC";
                             company.branch = "Branch 70";
                         } else if (companyId === "company2") {
                             company.password = "Hollandia2024";
                             company.environment = "";
+                            company.Real_environment = "check";
                             company.branch = "";
                         } else if (companyId === "company3") {
                             company.password = "Plassim2024";
                             company.environment = "";
+                            company.Real_environment = "check";
                             company.branch = "";
                         } else if (companyId === "company4") {
                             company.password = "Asofta2024";
                             company.environment = "";
+                            company.Real_environment = "check";
                             company.branch = "";
                         } else if (companyId === "company5") {
                             company.password = "Infiniya2024";
                             company.environment = "";
+                            company.Real_environment = "check";
                             company.branch = "";
                         } else if (companyId === "company6") {
                             company.password = "Vetmarket2024";
                             company.environment = "";
+                            company.Real_environment = "check";
                             company.branch = "";
                         } else if (companyId === "company7") {
                             company.password = "Tempo2024";
                             company.environment = "";
+                            company.Real_environment = "check";
                             company.branch = "1";
                         }
                     }
@@ -234,10 +242,7 @@
                     
                     container.innerHTML = `
                         <div class="company-details">
-                            <div class="detail-item">
-                                <div class="detail-label">Company Name</div>
-                                <div class="detail-value">${company.name}</div>
-                            </div>
+                           
                             <div class="detail-item">
                                 <div class="detail-label">Login Email</div>
                                 <div class="detail-value">${company.email}</div>
@@ -247,8 +252,12 @@
                                 <div class="detail-value">${company.password}</div>
                             </div>
                             <div class="detail-item">
-                                <div class="detail-label">Environment</div>
-                                <div class="detail-value">${company.environment}</div>
+                                <div class="detail-label">Test Environment</div>
+                                <div class="detail-value">${company.Test_environment}</div>
+                            </div>
+                             <div class="detail-item">
+                                <div class="detail-label">Real Environment</div>
+                                <div class="detail-value">${company.Real_environment}</div>
                             </div>
                             <div class="detail-item">
                                 <div class="detail-label">Default Branch</div>

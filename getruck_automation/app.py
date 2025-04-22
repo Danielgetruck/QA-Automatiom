@@ -26,7 +26,8 @@ COMPANIES = {
         "name": "Jafora",
         "email": "jafora@getruck.co",
         "password": "Jafor2024",
-        "environment": "RC",
+        "Test_environment": "v51",
+        "Real_environment": "RC",
         "branch": "Branch 70",
         "tests": {
             "login_test": {

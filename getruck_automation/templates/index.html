@@ -62,6 +62,12 @@
                         Tempo
                     </button>
                 </li>
+                <li class="nav-item">
+                    <button class="nav-link" id="company8-tab" data-bs-toggle="tab" data-bs-target="#company8" data-company-id="company8">
+                        <span class="company-indicator company-8"></span>
+                        Dasal
+                    </button>
+                </li>
             </ul>
             <div class="tab-content" id="companyTabsContent">
                 <!-- Company details sections will be generated dynamically -->
@@ -72,6 +78,7 @@
                 <div class="tab-pane fade company-info" id="company5"></div>
                 <div class="tab-pane fade company-info" id="company6"></div>
                 <div class="tab-pane fade company-info" id="company7"></div>
+                <div class="tab-pane fade company-info" id="company8"></div>
             </div>
         </div>
         
@@ -178,9 +185,9 @@
                     const company = {
                         name: data.company,
                         email: '',
-                        password: '***',
-                        Test_environment: 'Production',
-                        Real_environment :'check',
+                        password: '',
+                        Test_environment: '',
+                        Real_environment :'',
                         branch: ''
                     };
                     
@@ -205,36 +212,44 @@
                             company.branch = "Branch 70";
                         } else if (companyId === "company2") {
                             company.password = "******";
-                            company.environment = "";
-                            company.Real_environment = "check";
+                            company.Test_environment = "V51";
+                            company.Real_environment = "PROD";
                             company.branch = "";
                         } else if (companyId === "company3") {
                             company.password = "******";
-                            company.environment = "";
-                            company.Real_environment = "check";
+                            company.Test_environment = "V51";
+                            company.Real_environment = "PROD";
                             company.branch = "";
                         } else if (companyId === "company4") {
                             company.password = "******";
-                            company.environment = "";
-                            company.Real_environment = "check";
+                            company.Test_environment = "V51";
+                            company.Real_environment = "DEV";
                             company.branch = "";
                         } else if (companyId === "company5") {
                             company.password = "******";
-                            company.environment = "";
-                            company.Real_environment = "check";
+                            company.Test_environment = "V51";
+                            company.Real_environment = "PROD";
                             company.branch = "";
                         } else if (companyId === "company6") {
                             company.password = "******";
-                            company.environment = "";
-                            company.Real_environment = "check";
+                            company.Test_environment = "V51";
+                            company.Real_environment = "RC";
                             company.branch = "";
                         } else if (companyId === "company7") {
                             company.password = "******";
-                            company.environment = "";
-                            company.Real_environment = "check";
+                            company.Test_environment = "V51";
+                            company.Real_environment = "RC";
+                            company.branch = "1";
+                        }
+                        else if (companyId === "company8") {
+                            company.password = "******";
+                            company.Test_environment = "V51";
+                            company.Real_environment = "RC";
                             company.branch = "1";
                         }
                     }
+
+
                     
                     // Render the company details
                     const container = document.getElementById(companyId);

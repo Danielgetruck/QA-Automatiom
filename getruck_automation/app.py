@@ -88,7 +88,7 @@ COMPANIES = {
     },
     "company2": {
         "name": "Hollandia",
-        "email": "hollandia@getruck.co",
+        "email": "hollandia-account@getruck.co",
         "password": "******",
         "branch": "",
         "tests": {
@@ -202,7 +202,7 @@ COMPANIES = {
     },
     "company5": {
         "name": "Infiniya",
-        "email": "infiniya@getruck.co",
+        "email": "infiniya-account@getruck.co",
         "password": "******",
         "branch": "",
         "tests": {
@@ -228,7 +228,7 @@ COMPANIES = {
     },
     "company6": {
         "name": "Vetmarket",
-        "email": "vetmarket@getruck.co",
+        "email": "vetmarket@getruck.co.il",
         "password": "******",
         "branch": "",
         "tests": {
@@ -263,7 +263,7 @@ COMPANIES = {
     },
     "company7": {
         "name": "Tempo",
-        "email": "tempo@getruck.co",
+        "email": "tempo@getruck.co.il",
         "password": "******",
         "branch": "Branch 1",
         "tests": {
@@ -304,7 +304,52 @@ COMPANIES = {
                 "output": []
             }
         }
+    },
+     "company8": {
+        "name": "Dasal",
+        "email": "dasal@getruck.co",
+        "password": "******",
+        "branch": "",
+        "tests": {
+            "login_test": {
+                "name": "Login Test",
+                "description": "Tests login functionality for Dasal",
+                "script": "Dasal/login_test.py",
+                "script_args": "--company tempo --custom-login true",
+                "last_run": None,
+                "status": None,
+                "output": []
+            },
+            "sync_test": {
+                "name": "Sync Test",
+                "description": "Tests synchronization functionality for Dasal's beverage inventory",
+                "script": "Dasal/sync_Test.py",
+                "script_args": "--company Dasal --products beverages",
+                "last_run": None,
+                "status": None,
+                "output": []
+            },
+            "branch_selection": {
+                "name": "Branch Selection",
+                "description": "Tests Dasal's branch selection with beverage specialization",
+                "script": "Dasal/Branch_Selection.py",
+                "script_args": "--company Dasal --branch 45 --beverage-type all",
+                "last_run": None,
+                "status": None,
+                "output": []
+            },
+            "route_test": {
+                "name": "Route Test",
+                "description": "Tests Dasal's route management for beverage distribution",
+                "script": "Dasal/Route_Test.py",
+                "script_args": "--company Dasal --routes national --beverage-delivery true",
+                "last_run": None,
+                "status": None,
+                "output": []
+            }
+        }
     }
+    
 }
 
 # Worker thread to run tests
